@@ -1,20 +1,19 @@
 from flask import Flask, render_template
-import mysql.connector
-import os
 from dotenv import load_dotenv
+from api.models import db, Patient, User, Doctor, InsuranceProvider  # Import db and models
+from api.populate_data import populate_database  # Import the function to populate data
 
 # Load environment variables
 load_dotenv()
 
 app = Flask(__name__, template_folder='../templates')
 
-# MySQL database configuration
-db_config = {
-    'host': os.getenv('MYSQL_HOST'),
-    'user': os.getenv('MYSQL_USER'),
-    'password': os.getenv('MYSQL_PASSWORD'),
-    'database': os.getenv('MYSQL_DB')
-}
+# SQLite database configuration
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///meditrack.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Initialize SQLAlchemy
+db.init_app(app)
 
 @app.route('/')
 def home():
@@ -27,28 +26,11 @@ def about():
 @app.route('/datacheck')
 def show_patients():
     try:
-        # Connect to the database
-        conn = mysql.connector.connect(**db_config)
-        cursor = conn.cursor(dictionary=True)
-
-        # Fetch patients
-        cursor.execute("SELECT * FROM patient")
-        patients = cursor.fetchall()
-
-        # Fetch users
-        cursor.execute("SELECT id, username, role FROM users")
-        users = cursor.fetchall()
-
-        # Fetch doctors
-        cursor.execute("SELECT doctor_id, first_name, last_name, speciality, phone FROM doctor")
-        doctors = cursor.fetchall()
-
-        # Fetch insurance providers
-        cursor.execute("SELECT insurance_id, insurance_name, insurance_type, contact_number FROM insurance_provider")
-        insurances = cursor.fetchall()
-
-        cursor.close()
-        conn.close()
+        # Fetch data from the database
+        patients = Patient.query.all()
+        users = User.query.all()
+        doctors = Doctor.query.all()
+        insurances = InsuranceProvider.query.all()
 
         return render_template(
             'check.html',
@@ -59,3 +41,9 @@ def show_patients():
         )
     except Exception as e:
         return f"Error fetching data: {e}"
+
+# Recreate database tables and populate data
+with app.app_context():
+    db.drop_all()  # Drop existing tables
+    db.create_all()  # Create tables with updated schema
+    populate_database()  # Populate the database
