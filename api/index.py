@@ -2,18 +2,22 @@ from flask import Flask, render_template
 from dotenv import load_dotenv
 from api.models import db, Patient, User, Doctor, InsuranceProvider  # Import db and models
 from api.populate_data import populate_database  # Import the function to populate data
+import logging
 
 # Load environment variables
 load_dotenv()
 
 app = Flask(__name__, template_folder='../templates')
 
-# SQLite database configuration
+# SQLite database configurationk.db'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///meditrack.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize SQLAlchemy
 db.init_app(app)
+
+# Configure logging
+logging.basicConfig(level=logging.DEBUG)
 
 @app.route('/')
 def home():
@@ -40,6 +44,7 @@ def show_patients():
             insurances=insurances
         )
     except Exception as e:
+        logging.error(f"Error fetching data: {e}")
         return f"Error fetching data: {e}"
 
 # Recreate database tables and populate data
