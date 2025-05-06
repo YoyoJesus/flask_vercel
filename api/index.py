@@ -4,14 +4,16 @@ from api.models import db, Patient, User, Doctor, InsuranceProvider  # Import db
 from api.populate_data import populate_database  # Import the function to populate data
 import logging
 import traceback
+import os
 
 # Load environment variables
 load_dotenv()
 
 app = Flask(__name__, template_folder='../templates')
 
-# SQLite database configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/meditrack.db'
+# Ensure the database path is in the writable /tmp directory
+db_path = os.path.join('/tmp', 'meditrack.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize SQLAlchemy
@@ -52,6 +54,10 @@ def show_patients():
 # Recreate database tables and populate data
 try:
     with app.app_context():
+        # Ensure the /tmp directory exists
+        if not os.path.exists('/tmp'):
+            os.makedirs('/tmp')
+
         db.drop_all()  # Drop existing tables
         db.create_all()  # Create tables with updated schema
         populate_database()  # Populate the database
