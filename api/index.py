@@ -3,14 +3,15 @@ from dotenv import load_dotenv
 from api.models import db, Patient, User, Doctor, InsuranceProvider  # Import db and models
 from api.populate_data import populate_database  # Import the function to populate data
 import logging
+import traceback
 
 # Load environment variables
 load_dotenv()
 
 app = Flask(__name__, template_folder='../templates')
 
-# SQLite database configurationk.db'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///meditrack.db'
+# SQLite database configuration
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/meditrack.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize SQLAlchemy
@@ -45,10 +46,14 @@ def show_patients():
         )
     except Exception as e:
         logging.error(f"Error fetching data: {e}")
+        logging.error(traceback.format_exc())
         return f"Error fetching data: {e}"
 
 # Recreate database tables and populate data
-with app.app_context():
-    db.drop_all()  # Drop existing tables
-    db.create_all()  # Create tables with updated schema
-    populate_database()  # Populate the database
+try:
+    with app.app_context():
+        db.drop_all()  # Drop existing tables
+        db.create_all()  # Create tables with updated schema
+        populate_database()  # Populate the database
+except Exception as e:
+    logging.error(f"Error during database setup: {e}")
