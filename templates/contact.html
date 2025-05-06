@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <!-- Add links to Bootstrap CSS and JS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Add links to Font Awesome CSS for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body>
+    {{ navbar|safe }} <!-- Inject the navbar -->
+    <div class="container mt-5 text-center">
+        <h1 class="mt-4">Contact Me</h1>
+        <p>Feel free to reach out to me on any of the platforms below or fill out the form to send me an email.</p>
+
+        <div class="social-buttons mb-4">
+            <a href="https://github.com/YoyoJesus" target="_blank"><i class="fab fa-github fa-2x mx-2"></i></a>
+            <a href="https://www.linkedin.com/in/austin-sternberg-765620218/" target="_blank"><i class="fab fa-linkedin fa-2x mx-2"></i></a>
+            <a href="https://www.youtube.com/channel/UClPq39i7rc0DrfKMlvWr4AQ" target="_blank"><i class="fab fa-youtube fa-2x mx-2"></i></a>
+            <a href="https://www.reddit.com/user/Austinplaymms12" target="_blank"><i class="fab fa-reddit fa-2x mx-2"></i></a>
+            <a href="https://bsky.app/profile/yoyojesus.bsky.social" target="_blank"><i class="fab fa-bluesky fa-2x mx-2"></i></a>
+            <a href="https://www.instagram.com/yoyoje_sus/" target="_blank"><i class="fab fa-instagram fa-2x mx-2"></i></a>
+        </div>
+
+        <form id="contact-form">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+        <br/>
+        <p><strong>Please Note: </strong> After you click 'submit' it might take a second before you get confirmation!</p>
+    </div>
+</body>
+</html>
