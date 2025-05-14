@@ -13,11 +13,8 @@
 </head>
 <body>
     {{ navbar|safe }} <!-- Inject the navbar -->
-    <div class="container mt-5">
-        <div class="content contentResume">
-            <div class="profile-headshot">
-                <img src="/static/headshot.JPG" alt="Austin Sternberg Headshot" class="img-fluid">
-            </div>
+    <div class="container mt-5 resume-container">
+        <div class="resume-content">
             <h1>Austin Sternberg</h1>
             <h2>Computer Science Sophomore | Cybersecurity Enthusiast</h2>
             <p><strong>Email:</strong> <a href="mailto:asternb1@kent.edu">asternb1@kent.edu</a></p>
@@ -39,6 +36,15 @@
 
             <div class="section">
                 <h3>Experience</h3>
+
+                <h4>IT Intern</h4>
+                <h5><strong>Riverside Local Schools | May, 2025 - August, 2025</strong></h5>
+                <ul>
+                    <li>Assisted in the maintenance and deployment of the network</li>
+                    <li>Worked with the IT team to troubleshoot and resolve technical issues</li>
+                    <li>Gained hands-on experience in network security and system administration</li>
+                    <li>Helped teach the incoming student assistants how to repair and troubleshoot</li>
+                </ul>
 
                 <h4>Hackathon Coordinator</h4>
                 <h5><strong>HacKSU | 2024-Present</strong></h5>
@@ -62,7 +68,7 @@
             <div class="section">
                 <h3>Skills</h3>
                 <ul>
-                    <li><strong>Programming Languages:</strong> C++, Python, JavaScript (React, Node.js), HTML/CSS</li>
+                    <li><strong>Programming Languages:</strong> C++, Python, JavaScript (React, Vue, Svelte)</li>
                     <li><strong>Cybersecurity:</strong> Penetration Testing, Vulnerability Assessment, Network Security</li>
                     <li><strong>Tools & Technologies:</strong> Kali Linux, Wireshark, Metasploit, Git/GitHub, Docker</li>
                     <li><strong>Other:</strong> Strong problem-solving skills, Excellent teamwork and communication abilities</li>
@@ -70,10 +76,11 @@
             </div>
 
             <div class="section">
-                <h3>Certifications</h3>
+                <h3>Certifications & Licenses</h3>
                 <ul>
                     <li>Biomedical Responsible Conduct of Research I - <a href="https://www.citiprogram.org/verify/?w46cdd6c9-a846-456c-b9e2-290aa4c8c269-65936958">View</a></li>
                     <li>Social and Behavioral Research - <a href="https://www.citiprogram.org/verify/?wd6fd270b-d214-498b-a7bd-8e04aa6af11e-65936957">View</a></li>
+                    <li>GMRS Radio License - <strong>WSHS379</strong></li>
                 </ul>
             </div>
 
@@ -81,7 +88,7 @@
                 <h3>Organizations</h3>
                 <ul>
                     <li><strong>HacKSU</strong> - Hackathon Coordinator</li>
-                    <li><strong>KSU Combat Robotics</strong> - Project Manager</li>
+                    <li><strong>KSU Combat Robotics</strong> - President</li>
                     <li><strong>ALD</strong> - Member</li>
                 </ul>
             </div>
@@ -97,6 +104,8 @@
                 </ul>
             </div>
         </div>
+        <img src="/static/headshot.JPG" alt="Austin Sternberg Headshot" class="resume-headshot">
     </div>
+    {{ footer|safe }} <!-- Inject the footer -->
 </body>
 </html>

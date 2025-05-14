@@ -28,7 +28,6 @@ def about():
 def projects():
     return render_template('projects.html', navbar=render_navbar(), footer=render_footer())
 
-
 @app.route('/resume')
 def resume():
     return render_template('resume.html', navbar=render_navbar(), footer=render_footer())

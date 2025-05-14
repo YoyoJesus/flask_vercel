@@ -140,11 +140,7 @@
         </div>
     </div>  
 
-    <footer class="footer-custom text-center py-3 bg-light mt-5">
-        <div class="container">
-            <p class="mb-0">2025 Austin Sternberg - Built with HTML, CSS, and JavaScript</p>
-        </div>
-    </footer>
+    {{ footer|safe }} <!-- Inject the footer -->
     {% endblock %}
 </body>
 </html>

@@ -14,18 +14,34 @@
 </head>
 <body>
     {{ navbar|safe }} <!-- Inject the navbar -->
-    <div class="container">
-        <h1 class="mt-4">About Me</h1>
-        <p>Hey, I'm Austin! I'm a Computer Science sophomore at Kent State, focusing on cybersecurity with a minor in Computer Engineering Technology. I like breaking things (ethically) and figuring out how to make them more secure.</p>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">About Me</h1>
+        <p class="text-center">Hey, I'm Austin! I'm a Computer Science sophomore at Kent State, focusing on cybersecurity with a minor in Computer Engineering Technology. I like breaking things (ethically) and figuring out how to make them more secure.</p>
         
-        <ul class="list-unstyled">
-            <li><strong>🔒 Cybersecurity & Hacking:</strong> I'm diving deep into penetration testing, ethical hacking, and secure coding practices. I love figuring out vulnerabilities before the bad guys do.</li>
-            <li><strong>🤖 Robotics & Engineering:</strong> I’m heavily involved in combat robotics, where I help build, maintain, and (occasionally) fix bots that take a serious beating.</li>
-            <li><strong>🖥️ Tech & Programming:</strong> I’ve worked on projects ranging from web development to machine learning and VR-based motion sickness research. Whether it's coding or hardware, I'm always up for a challenge.</li>
-            <li><strong>🎲 Gaming & D&D:</strong> When I’m not messing with code, I’m probably playing Dungeons & Dragons, playing <i>Hearts of Iron</i>, or getting lost in sci-fi and dystopian worlds.</li>
-            <li><strong>📡 Networking & IT:</strong> I work as an IT Assistant, helping maintain networks and troubleshoot hardware issues. Summer jobs in IT have given me hands-on experience with real-world tech problems.</li>
-            <li><strong>🚀 Future Goals:</strong> My ultimate goal is to work in penetration testing, finding and fixing security flaws before they become real threats. I want to be on the front lines of cybersecurity, making the digital world safer.</li>
-        </ul>
+        <div class="row w-55">
+            <div class="col-md-10 offset-md-1">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <strong>🔒 Cybersecurity & Hacking:</strong> I'm diving deep into penetration testing, ethical hacking, and secure coding practices. I love figuring out vulnerabilities before the bad guys do.
+                    </li>
+                    <li class="list-group-item">
+                        <strong>🤖 Robotics & Engineering:</strong> I’m heavily involved in combat robotics, where I help build, maintain, and (occasionally) fix bots that take a serious beating.
+                    </li>
+                    <li class="list-group-item">
+                        <strong>🖥️ Tech & Programming:</strong> I’ve worked on projects ranging from web development to machine learning and VR-based motion sickness research. Whether it's coding or hardware, I'm always up for a challenge.
+                    </li>
+                    <li class="list-group-item">
+                        <strong>🎲 Gaming & D&D:</strong> When I’m not messing with code, I’m probably playing Dungeons & Dragons, playing <i>Hearts of Iron</i>, or getting lost in sci-fi and dystopian worlds.
+                    </li>
+                    <li class="list-group-item">
+                        <strong>📡 Networking & IT:</strong> I work as an IT Assistant, helping maintain networks and troubleshoot hardware issues. Summer jobs in IT have given me hands-on experience with real-world tech problems.
+                    </li>
+                    <li class="list-group-item">
+                        <strong>🚀 Future Goals:</strong> My ultimate goal is to work in penetration testing, finding and fixing security flaws before they become real threats. I want to be on the front lines of cybersecurity, making the digital world safer.
+                    </li>
+                </ul>
+            </div>
+        </div>
 
         <hr class="my-5">
 
@@ -79,7 +95,7 @@
                 const postElement = document.createElement('div');
                 postElement.className = 'col-md-4 mb-4';
                 postElement.innerHTML = `
-                    <div class="card">
+                    <div class="card h-100">
                         <div class="card-body">
                             <h5 class="card-title">${post.platform}</h5>
                             <p class="card-text">${post.content}</p>
