@@ -6,32 +6,28 @@
     <title>{% block title %}Home{% endblock %}</title>
     <!-- Add links to Bootstrap CSS and JavaScript -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css"> <!-- Link to custom styles -->
+    <link href="/static/styles.css" rel="stylesheet"> <!-- Link to custom styles -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const roles = [
-                "Cybersecurity Enthusiast",
-                "Hackathon Coordinator",
-                "Researcher",
-                "Hobbyist Web Developer",
-                "Tech Enthusiast",
-                "Student",
-                "Battlebots Enthusiast",
-                "Board Game Enthusiast",
-                "D&D Player",
-                "Problem Solver",
-                "Science Fiction Fan",
-                "All Around Nerd"
-            ];
-            let roleIndex = 0;
             const typingText = document.getElementById("typing-text");
             const cursor = document.querySelector(".cursor");
 
-            function typeRole() {
-                const role = roles[roleIndex];
+            async function fetchRole() {
+                try {
+                    const response = await fetch('/typing-effect');
+                    const data = await response.json();
+                    return data.role;
+                } catch (error) {
+                    console.error("Error fetching role:", error);
+                    return "Error Loading Role";
+                }
+            }
+
+            async function typeRole() {
+                const role = await fetchRole();
                 let charIndex = 0;
 
                 function typeChar() {
@@ -48,7 +44,7 @@
             }
 
             function eraseRole() {
-                const role = roles[roleIndex];
+                const role = typingText.textContent;
                 let charIndex = role.length;
 
                 function eraseChar() {
@@ -57,7 +53,6 @@
                         charIndex--;
                         setTimeout(eraseChar, 50); // Erasing speed
                     } else {
-                        roleIndex = (roleIndex + 1) % roles.length; // Move to the next role
                         setTimeout(typeRole, 500); // Pause before typing the next role
                     }
                 }

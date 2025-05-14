@@ -1,0 +1,30 @@
+/* Apply a blue-to-white gradient background to the entire body */
+body {
+    background: linear-gradient(to bottom, #007BFF, #FFFFFF);
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Style the navbar to be black */
+.navbar {
+    background-color: #000000 !important;
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link {
+    color: #FFFFFF !important;
+}
+
+.navbar .nav-link:hover {
+    color: #CCCCCC !important;
+}
+
+/* Ensure content is readable on the gradient background */
+.container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}

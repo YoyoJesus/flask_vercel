@@ -1,6 +1,6 @@
 def render_navbar():
     return '''
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
                 <img src="/static/myAvatar.jpg" alt="Austin Sternberg" style="width: 50px; border-radius: 50%;">
@@ -19,4 +19,13 @@ def render_navbar():
             </div>
         </div>
     </nav>
+    '''
+
+def render_footer():
+    return '''
+    <footer class="footer-custom text-center py-3 bg-dark text-white mt-5">
+        <div class="container">
+            <p class="mb-0">2025 Austin Sternberg - Somehow running Flask on Vercel</p>
+        </div>
+    </footer>
     '''

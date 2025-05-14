@@ -5,7 +5,7 @@ import traceback
 import os
 import time
 import json  # Import JSON module for reading config.json
-from .components import render_navbar  # Import the navbar function
+from .components import render_navbar, render_footer  # Import the navbar and footer functions
 
 # Load environment variables
 load_dotenv()
@@ -18,24 +18,24 @@ logging.basicConfig(level=logging.DEBUG)
 
 @app.route('/')
 def home():
-    return render_template('index.html', navbar=render_navbar())
+    return render_template('index.html', navbar=render_navbar(), footer=render_footer())
 
 @app.route('/about')
 def about():
-    return render_template('about.html', navbar=render_navbar())
+    return render_template('about.html', navbar=render_navbar(), footer=render_footer())
 
 @app.route('/projects')
 def projects():
-    return render_template('projects.html', navbar=render_navbar())
+    return render_template('projects.html', navbar=render_navbar(), footer=render_footer())
 
 
 @app.route('/resume')
 def resume():
-    return render_template('resume.html', navbar=render_navbar())
+    return render_template('resume.html', navbar=render_navbar(), footer=render_footer())
 
 @app.route('/contact')
 def contact():
-    return render_template('contact.html', navbar=render_navbar())
+    return render_template('contact.html', navbar=render_navbar(), footer=render_footer())
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -70,7 +70,7 @@ def admin():
         except Exception as e:
             logging.error("Error saving posts: %s", traceback.format_exc())
             return jsonify({"error": "Failed to save posts"}), 500
-    return render_template('admin.html', navbar=render_navbar())
+    return render_template('admin.html', navbar=render_navbar(), footer=render_footer())
 
 @app.route('/api/social-posts', methods=['GET'])
 def get_social_posts():
@@ -106,14 +106,12 @@ def typing_effect():
 @app.route('/api/credentials', methods=['GET'])
 def get_credentials():
     try:
-        config_path = os.path.join(os.path.dirname(__file__), '../config.json')  # Path to config.json
-        with open(config_path) as config_file:
-            credentials = json.load(config_file)
-        return jsonify({
-            "publicKey": credentials["publicKey"],
-            "serviceID": credentials["serviceID"],
-            "templateID": credentials["templateID"]
-        })
+        credentials = {
+            "publicKey": os.getenv("PUBLIC_KEY"),
+            "serviceID": os.getenv("SERVICE_ID"),
+            "templateID": os.getenv("TEMPLATE_ID")
+        }
+        return jsonify(credentials)
     except Exception as e:
         logging.error("Error loading credentials: %s", traceback.format_exc())
         return jsonify({"error": "Failed to load credentials"}), 500

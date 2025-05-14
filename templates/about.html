@@ -9,6 +9,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Add custom styles -->
+    <link href="/static/styles.css" rel="stylesheet">
 </head>
 <body>
     {{ navbar|safe }} <!-- Inject the navbar -->
@@ -34,14 +36,12 @@
             </div>
         </div>
 
-        <p class="text-center mt-5">This site is where I document my projects, experiences, and things that interest me.</p>
-        <p class="text-center">Feel free to explore, and if you want to connect, check out my <a href="contact-1.html">contact page</a>!</p>
-
         <blockquote class="blockquote text-center mt-5">
             <p class="mb-0">"Anything out there is vulnerable to attack given enough time and resources."</p>
             <footer class="blockquote-footer">Kevin Mitnick</footer>
         </blockquote>
     </div>
+    {{ footer|safe }} <!-- Inject the footer -->
 
     <script>
         // JSON data for social media posts
