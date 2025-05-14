@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <!-- Add links to Bootstrap CSS and JS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Add custom styles -->
+    <link href="/static/styles.css" rel="stylesheet">
+</head>
+<body>
+    {{ navbar|safe }} <!-- Inject the navbar -->
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">About Me</h1>
+        <p class="text-center">Hey, I'm Austin! I'm a Computer Science sophomore at Kent State, focusing on cybersecurity with a minor in Computer Engineering Technology. I like breaking things (ethically) and figuring out how to make them more secure.</p>
+        
+        <div class="row w-55">
+            <div class="col-md-10 offset-md-1">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <strong>🔒 Cybersecurity & Hacking:</strong> I'm diving deep into penetration testing, ethical hacking, and secure coding practices. I love figuring out vulnerabilities before the bad guys do.
+                    </li>
+                    <li class="list-group-item">
+                        <strong>🤖 Robotics & Engineering:</strong> I’m heavily involved in combat robotics, where I help build, maintain, and (occasionally) fix bots that take a serious beating.
+                    </li>
+                    <li class="list-group-item">
+                        <strong>🖥️ Tech & Programming:</strong> I’ve worked on projects ranging from web development to machine learning and VR-based motion sickness research. Whether it's coding or hardware, I'm always up for a challenge.
+                    </li>
+                    <li class="list-group-item">
+                        <strong>🎲 Gaming & D&D:</strong> When I’m not messing with code, I’m probably playing Dungeons & Dragons, playing <i>Hearts of Iron</i>, or getting lost in sci-fi and dystopian worlds.
+                    </li>
+                    <li class="list-group-item">
+                        <strong>📡 Networking & IT:</strong> I work as an IT Assistant, helping maintain networks and troubleshoot hardware issues. Summer jobs in IT have given me hands-on experience with real-world tech problems.
+                    </li>
+                    <li class="list-group-item">
+                        <strong>🚀 Future Goals:</strong> My ultimate goal is to work in penetration testing, finding and fixing security flaws before they become real threats. I want to be on the front lines of cybersecurity, making the digital world safer.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <hr class="my-5">
+
+        <div class="social-media-feed">
+            <h2 class="text-center mb-4">Social Media Highlights</h2>
+            <div id="social-feed" class="row">
+                <!-- Posts will be dynamically loaded here -->
+            </div>
+        </div>
+
+        <blockquote class="blockquote text-center mt-5">
+            <p class="mb-0">"Anything out there is vulnerable to attack given enough time and resources."</p>
+            <footer class="blockquote-footer">Kevin Mitnick</footer>
+        </blockquote>
+    </div>
+    {{ footer|safe }} <!-- Inject the footer -->
+
+    <script>
+        // JSON data for social media posts
+        const socialMediaPosts = [
+            {
+                platform: "LinkedIn",
+                content: "CS Leadership Award",
+                date: "2025-04-30",
+                link: "https://www.linkedin.com/feed/update/urn:li:activity:7321347377754234880/"
+            },
+            {
+                "platform": "LinkedIn",
+                "content": "KHE 2025 Recap",
+                "date": "2025-03-04",
+                "link": "https://www.linkedin.com/feed/update/urn:li:activity:7301040194625982465/"
+            },
+            {
+                "platform": "Youtube",
+                "content": "Project Green Explained",
+                "date": "2024-04-04",
+                "link": "https://www.youtube.com/watch?v=i8Cw8d1HLwI"
+            },
+            {
+                "platform": "Instagram",
+                "content": "New Robotics Sponsor",
+                "date": "2024-10-11",
+                "link": "https://www.instagram.com/p/DBAeiH8NfBs/"
+            }
+        ];
+
+        // Function to render social media posts
+        function renderSocialMediaPosts(posts) {
+            const feedContainer = document.getElementById('social-feed');
+            posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'col-md-4 mb-4';
+                postElement.innerHTML = `
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">${post.platform}</h5>
+                            <p class="card-text">${post.content}</p>
+                            <p class="card-text"><small class="text-muted">${new Date(post.date).toLocaleDateString()}</small></p>
+                            <a href="${post.link}" class="btn btn-primary" target="_blank">View Post</a>
+                        </div>
+                    </div>
+                `;
+                feedContainer.appendChild(postElement);
+            });
+        }
+
+        // Load and render posts on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderSocialMediaPosts(socialMediaPosts);
+        });
+    </script>
+</body>
+</html>

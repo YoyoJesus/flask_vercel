@@ -1,0 +1,100 @@
+/* Apply a blue-to-white gradient background to the entire body */
+body {
+    background: linear-gradient(to bottom, #0400ff, #3229aa);
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Style the navbar to be black */
+.navbar {
+    background-color: #000000 !important;
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link {
+    color: #ffffff !important;
+}
+
+.navbar .nav-link:hover {
+    color: #3e32eb !important;
+}
+
+/* Ensure content is readable on the gradient background */
+.container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    max-width: 1500px;
+    margin: 20px auto;
+}
+
+/* Style the footer for better appearance */
+.footer-custom {
+    border-top: 2px solid #8400ff;
+    padding-top: 15px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Add styling for the resume page */
+.resume-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.resume-content {
+    flex: 1;
+}
+
+.resume-headshot {
+    width: 200px;
+    height: 200px;
+    border-radius: 20%;
+    object-fit: cover;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Project page styles */
+h1, h2 {
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+}
+
+.table-container {
+    margin-top: 20px;
+}
+
+.table {
+    border: 1px solid #ddd;
+}
+
+.table th, .table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.iframe-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background: #000;
+}
+
+.iframe-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}

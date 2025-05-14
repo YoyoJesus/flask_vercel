@@ -3,9 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>{% block title %}Home{% endblock %}</title>
+    <!-- Add links to Bootstrap CSS and JavaScript -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/styles.css" rel="stylesheet"> <!-- Link to custom styles -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const typingText = document.getElementById("typing-text");
+            const cursor = document.querySelector(".cursor");
+
+            async function fetchRole() {
+                try {
+                    const response = await fetch('/typing-effect');
+                    const data = await response.json();
+                    return data.role;
+                } catch (error) {
+                    console.error("Error fetching role:", error);
+                    return "Error Loading Role";
+                }
+            }
+
+            async function typeRole() {
+                const role = await fetchRole();
+                let charIndex = 0;
+
+                function typeChar() {
+                    if (charIndex < role.length) {
+                        typingText.textContent += role[charIndex];
+                        charIndex++;
+                        setTimeout(typeChar, 100); // Typing speed
+                    } else {
+                        setTimeout(eraseRole, 2000); // Pause before erasing
+                    }
+                }
+
+                typeChar();
+            }
+
+            function eraseRole() {
+                const role = typingText.textContent;
+                let charIndex = role.length;
+
+                function eraseChar() {
+                    if (charIndex > 0) {
+                        typingText.textContent = role.substring(0, charIndex - 1);
+                        charIndex--;
+                        setTimeout(eraseChar, 50); // Erasing speed
+                    } else {
+                        setTimeout(typeRole, 500); // Pause before typing the next role
+                    }
+                }
+
+                eraseChar();
+            }
+
+            typeRole(); // Start the typing effect
+        });
+    </script>
 </head>
 <body>
-    <h1>Welcome to the Home Page</h1>
+    {{ navbar|safe }} <!-- Inject the navbar -->
+    {% block content %}
+
+    <div class="container mt-5">
+        <div class="content text-center">
+            <h1 class="display-4 fw-bold">Welcome!</h1>
+            <div class="typing-container my-3">
+                <p class="intro fs-4">I am <span id="typing-text"></span><span class="cursor">|</span></p>
+            </div>
+            <p class="lead">This website serves as a documentation of my work & a portfolio.</p>
+        </div>
+
+        <hr class="my-5">
+
+        <h2 class="text-center mb-4">My Non-Programming Interests</h2>
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h3 class="card-title">Dungeons & Dragons</h3>
+                        <p class="card-text">Worldbuilding, character creation, and immersive storytelling are some of my favorite things in D&D. Right now, I'm playing in a campaign inspired by <i>The Darkest Minds</i>.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h3 class="card-title">Gaming</h3>
+                        <p class="card-text">I enjoy both casual and competitive gaming. Some of my favorite titles include:</p>
+                        <ul class="list-unstyled">
+                            <li>Bioshock</li>
+                            <li>Baldur’s Gate 3</li>
+                            <li>Halo</li>
+                            <li>Hearts of Iron</li>
+                            <li>Balatro</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h3 class="card-title">Music</h3>
+                        <p class="card-text">While my music taste can be vast, my friends describe my favorites as 'emo'. Some go-to artists:</p>
+                        <ul class="list-unstyled">
+                            <li>Twenty One Pilots</li>
+                            <li>Green Day</li>
+                            <li>Sabaton</li>
+                            <li>Gorillaz</li>
+                            <li>Holly Humberstone</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h3 class="card-title">Movies & TV</h3>
+                        <p class="card-text">My favorite genres are primarily sci-fi and fantasy. Some of my favorite movies and shows include:</p>
+                        <ul class="list-unstyled">
+                            <li>Doctor Who</li>
+                            <li>Mr. Robot</li>
+                            <li>Lord of the Rings</li>
+                            <li>The Addams Family</li>
+                            <li>The Martian</li>
+                            <li>For All Mankind</li>
+                            <li>Daredevil</li>
+                        </ul>
+                        <p>A full list of my favorite movies and shows can be found <a href="./movies">here</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+
+    {{ footer|safe }} <!-- Inject the footer -->
+    {% endblock %}
 </body>
 </html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Movies and TV{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/styles.css" rel="stylesheet">
+</head>
+<body>
+    {{ navbar|safe }} <!-- Inject the navbar -->
+    <div class="container mt-5">
+        <div class="base-box border rounded p-4 bg-light shadow">
+            <h1 class="text-center mb-4 typing-text"><strong>List of my favorite Movies & TV Shows</strong></h1>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="interest-item">
+                        <h2 class="mb-3">🎬 Movies</h2>
+                        <ul class="list-group">
+                            <li class="list-group-item">School of Rock</li>
+                            <li class="list-group-item">Addams Family & Addams Family Values</li>
+                            <li class="list-group-item">Dungeons & Dragons: Honor Among Thieves</li>
+                            <li class="list-group-item">Scott Pilgrim Versus The World</li>
+                            <li class="list-group-item">The Social Network</li>
+                            <li class="list-group-item">Iron Man 1, 2, & 3</li>
+                            <li class="list-group-item">Oppenheimer</li>
+                            <li class="list-group-item">2001: A Space Odyssey</li>
+                            <li class="list-group-item">Ford v Ferrari</li>
+                            <li class="list-group-item">The Martian</li>
+                            <li class="list-group-item">The Amazing Spiderman 1 & 2</li>
+                            <li class="list-group-item">Spiderman: No Way Home</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="interest-item">
+                        <h2 class="mb-3">📺 TV Shows</h2>
+                        <ul class="list-group">
+                            <li class="list-group-item">Doctor Who</li>
+                            <li class="list-group-item">Daredevil & Daredevil: Born Again</li>
+                            <li class="list-group-item">The Rookie</li>
+                            <li class="list-group-item">Jessica Jones</li>
+                            <li class="list-group-item">Rivals</li>
+                            <li class="list-group-item">Mr. Robot</li>
+                            <li class="list-group-item">For All Mankind</li>
+                            <li class="list-group-item">All in The Family</li>
+                            <li class="list-group-item">M.A.S.H</li>
+                            <li class="list-group-item">Adam-12</li>
+                            <li class="list-group-item">Dragnet</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    {{ footer|safe }} <!-- Inject the footer -->
+</body>
+</html>
