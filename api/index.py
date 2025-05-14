@@ -36,6 +36,10 @@ def resume():
 def contact():
     return render_template('contact.html', navbar=render_navbar(), footer=render_footer())
 
+@app.route('/movies')
+def movies():
+    return render_template('movies.html', navbar=render_navbar(), footer=render_footer())
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
