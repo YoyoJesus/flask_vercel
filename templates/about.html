@@ -42,5 +42,60 @@
             <footer class="blockquote-footer">Kevin Mitnick</footer>
         </blockquote>
     </div>
+
+    <script>
+        // JSON data for social media posts
+        const socialMediaPosts = [
+            {
+                platform: "LinkedIn",
+                content: "CS Leadership Award",
+                date: "2025-04-30",
+                link: "https://www.linkedin.com/feed/update/urn:li:activity:7321347377754234880/"
+            },
+            {
+                "platform": "LinkedIn",
+                "content": "KHE 2025 Recap",
+                "date": "2025-03-04",
+                "link": "https://www.linkedin.com/feed/update/urn:li:activity:7301040194625982465/"
+            },
+            {
+                "platform": "Youtube",
+                "content": "Project Green Explained",
+                "date": "2024-04-04",
+                "link": "https://www.youtube.com/watch?v=i8Cw8d1HLwI"
+            },
+            {
+                "platform": "Instagram",
+                "content": "New Robotics Sponsor",
+                "date": "2024-10-11",
+                "link": "https://www.instagram.com/p/DBAeiH8NfBs/"
+            }
+        ];
+
+        // Function to render social media posts
+        function renderSocialMediaPosts(posts) {
+            const feedContainer = document.getElementById('social-feed');
+            posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'col-md-4 mb-4';
+                postElement.innerHTML = `
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">${post.platform}</h5>
+                            <p class="card-text">${post.content}</p>
+                            <p class="card-text"><small class="text-muted">${new Date(post.date).toLocaleDateString()}</small></p>
+                            <a href="${post.link}" class="btn btn-primary" target="_blank">View Post</a>
+                        </div>
+                    </div>
+                `;
+                feedContainer.appendChild(postElement);
+            });
+        }
+
+        // Load and render posts on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderSocialMediaPosts(socialMediaPosts);
+        });
+    </script>
 </body>
 </html>
