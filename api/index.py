@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, redirect, url_for, session
+from flask import Flask, render_template, jsonify, request, redirect, url_for, session, flash
 from dotenv import load_dotenv
 import logging
 import traceback
@@ -56,7 +56,8 @@ def login():
             return redirect(url_for('admin'))
         else:
             logging.warning(f"Failed login attempt with username: {username}")
-            return render_template('login.html', error="Invalid credentials")
+            flash("Invalid credentials", "danger")
+            return render_template('login.html')
     return render_template('login.html')
 
 @app.route('/logout')
@@ -81,6 +82,7 @@ def admin():
                 logging.error("Error saving posts: %s", traceback.format_exc())
                 return jsonify({"error": "Failed to save posts"}), 500
         # If not JSON, ignore and fall through to render the page
+        return redirect(url_for('admin'))
     # Load movies and tv_shows from movies.json
     movies_path = os.path.join(os.path.dirname(__file__), '../movies.json')
     with open(movies_path, encoding='utf-8') as f:
@@ -100,6 +102,9 @@ def add_movie():
         data['movies'].append(movie)
         with open(movies_path, 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=2)
+        flash(f"Added movie: {movie}", "success")
+    else:
+        flash("Movie already exists or invalid input.", "warning")
     return redirect(url_for('admin'))
 
 @app.route('/admin/add_tv', methods=['POST'])
@@ -114,6 +119,9 @@ def add_tv():
         data['tv_shows'].append(tv_show)
         with open(movies_path, 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=2)
+        flash(f"Added TV show: {tv_show}", "success")
+    else:
+        flash("TV show already exists or invalid input.", "warning")
     return redirect(url_for('admin'))
 
 @app.route('/admin/delete_movie', methods=['POST'])
@@ -128,6 +136,9 @@ def delete_movie():
         data['movies'].remove(movie)
         with open(movies_path, 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=2)
+        flash(f"Deleted movie: {movie}", "success")
+    else:
+        flash("Movie not found.", "warning")
     return redirect(url_for('admin'))
 
 @app.route('/admin/delete_tv', methods=['POST'])
@@ -142,6 +153,9 @@ def delete_tv():
         data['tv_shows'].remove(tv_show)
         with open(movies_path, 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=2)
+        flash(f"Deleted TV show: {tv_show}", "success")
+    else:
+        flash("TV show not found.", "warning")
     return redirect(url_for('admin'))
 
 @app.route('/api/social-posts', methods=['GET'])
