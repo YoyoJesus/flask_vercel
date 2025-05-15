@@ -11,92 +11,40 @@
     {{ navbar|safe }}
     <div class="container mt-5">
         <h1 class="text-center">Admin Panel</h1>
-        <div id="posts-container" class="mt-4"></div>
-        <button id="add-btn" class="btn btn-primary mt-3">Add New Post</button>
-        <button id="save-btn" class="btn btn-success mt-3">Save Changes</button>
+        <h2>Add Movie</h2>
+        <form method="post" action="/admin/add_movie" class="mb-3">
+            <input type="text" name="movie" class="form-control mb-2" placeholder="Movie name" required>
+            <button type="submit" class="btn btn-primary">Add Movie</button>
+        </form>
+        <h2>Add TV Show</h2>
+        <form method="post" action="/admin/add_tv" class="mb-3">
+            <input type="text" name="tv_show" class="form-control mb-2" placeholder="TV Show name" required>
+            <button type="submit" class="btn btn-primary">Add TV Show</button>
+        </form>
+        <h2>Movies</h2>
+        <ul class="list-group mb-4">
+            {% for movie in movies %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ movie }}
+                <form method="post" action="/admin/delete_movie" style="display:inline;">
+                    <input type="hidden" name="movie" value="{{ movie }}">
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+        <h2>TV Shows</h2>
+        <ul class="list-group">
+            {% for tv in tv_shows %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ tv }}
+                <form method="post" action="/admin/delete_tv" style="display:inline;">
+                    <input type="hidden" name="tv_show" value="{{ tv }}">
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
     </div>
-
-    <script>
-        async function loadPosts() {
-            const response = await fetch('/api/social-posts');
-            const posts = await response.json();
-            const container = document.getElementById('posts-container');
-            container.innerHTML = '';
-            posts.forEach((post, index) => {
-                container.innerHTML += createPostCard(post, index);
-            });
-        }
-
-        function createPostCard(post, index) {
-            return `
-                <div class="card mb-3" data-index="${index}">
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label>Platform</label>
-                            <input type="text" class="form-control" value="${post.platform}" data-index="${index}" data-field="platform">
-                        </div>
-                        <div class="form-group">
-                            <label>Content</label>
-                            <input type="text" class="form-control" value="${post.content}" data-index="${index}" data-field="content">
-                        </div>
-                        <div class="form-group">
-                            <label>Date</label>
-                            <input type="date" class="form-control" value="${post.date}" data-index="${index}" data-field="date">
-                        </div>
-                        <div class="form-group">
-                            <label>Link</label>
-                            <input type="url" class="form-control" value="${post.link}" data-index="${index}" data-field="link">
-                        </div>
-                        <button class="btn btn-danger btn-sm mt-2" onclick="deletePost(${index})">Delete</button>
-                    </div>
-                </div>
-            `;
-        }
-
-        function addNewPost() {
-            const container = document.getElementById('posts-container');
-            const newIndex = container.children.length;
-            const newPost = {
-                platform: '',
-                content: '',
-                date: '',
-                link: ''
-            };
-            container.innerHTML += createPostCard(newPost, newIndex);
-        }
-
-        function deletePost(index) {
-            const postCard = document.querySelector(`.card[data-index="${index}"]`);
-            if (postCard) {
-                postCard.remove();
-            }
-        }
-
-        async function savePosts() {
-            const inputs = document.querySelectorAll('[data-index]');
-            const posts = [];
-            inputs.forEach(input => {
-                const index = input.getAttribute('data-index');
-                const field = input.getAttribute('data-field');
-                if (!posts[index]) posts[index] = {};
-                posts[index][field] = input.value;
-            });
-            const response = await fetch('/admin', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(posts)
-            });
-            const result = await response.json();
-            if (result.success) {
-                alert('Posts saved successfully!');
-            } else {
-                alert('Failed to save posts.');
-            }
-        }
-
-        document.getElementById('add-btn').addEventListener('click', addNewPost);
-        document.getElementById('save-btn').addEventListener('click', savePosts);
-        document.addEventListener('DOMContentLoaded', loadPosts);
-    </script>
 </body>
 </html>
