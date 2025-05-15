@@ -64,10 +64,23 @@ def logout():
     session.pop('logged_in', None)
     return redirect(url_for('login'))
 
-@app.route('/admin', methods=['GET'])
+@app.route('/admin', methods=['GET', 'POST'])
 def admin():
     if not session.get('logged_in'):
         return redirect(url_for('login'))
+    if request.method == 'POST':
+        # Only handle JSON requests for social posts
+        if request.is_json:
+            try:
+                posts = request.json
+                config_path = os.path.join(os.path.dirname(__file__), '../social_posts.json')
+                with open(config_path, 'w') as file:
+                    json.dump(posts, file, indent=4)
+                return jsonify({"success": True})
+            except Exception as e:
+                logging.error("Error saving posts: %s", traceback.format_exc())
+                return jsonify({"error": "Failed to save posts"}), 500
+        # If not JSON, ignore and fall through to render the page
     # Load movies and tv_shows from movies.json
     movies_path = os.path.join(os.path.dirname(__file__), '../movies.json')
     with open(movies_path, encoding='utf-8') as f:
