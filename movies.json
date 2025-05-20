@@ -1,0 +1,29 @@
+{
+  "movies": [
+    "School of Rock",
+    "Addams Family & Addams Family Values",
+    "Dungeons & Dragons: Honor Among Thieves",
+    "Scott Pilgrim Versus The World",
+    "The Social Network",
+    "Iron Man 1, 2, & 3",
+    "Oppenheimer",
+    "2001: A Space Odyssey",
+    "Ford v Ferrari",
+    "The Martian",
+    "The Amazing Spiderman 1 & 2",
+    "Spiderman: No Way Home"
+  ],
+  "tv_shows": [
+    "Doctor Who",
+    "Daredevil & Daredevil: Born Again",
+    "The Rookie",
+    "Jessica Jones",
+    "Rivals",
+    "Mr. Robot",
+    "For All Mankind",
+    "All in The Family",
+    "M.A.S.H",
+    "Adam-12",
+    "Dragnet"
+  ]
+}
