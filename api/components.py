@@ -26,7 +26,13 @@ def render_footer():
     return '''
     <footer class="footer-custom text-center py-3 bg-dark text-white mt-5">
         <div>
-            <p class="mb-0">2025 Austin Sternberg - Somehow running Flask on Vercel</p>
+            <p class="mb-0"><span id="current-year"></span> Austin Sternberg</p>
         </div>
     </footer>
+    <script>
+        (function(){
+            var el = document.getElementById('current-year');
+            if (el) el.textContent = new Date().getFullYear();
+        })();
+    </script>
     '''
