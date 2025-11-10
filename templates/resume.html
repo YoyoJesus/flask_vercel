@@ -1,19 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume</title>
-    <!-- Add links to Bootstrap CSS and JS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link href="/static/styles.css" rel="stylesheet">
-</head>
-<body>
-    {{ navbar|safe }} <!-- Inject the navbar -->
-    <div class="container mt-5 resume-container">
+{% extends 'base.html' %}
+
+{% block title %}Resume{% endblock %}
+
+{% block content %}
+    <div class="mt-5 resume-container">
         <div class="resume-content">
             <h1>Austin Sternberg</h1>
             <h2>Computer Science Sophomore | Cybersecurity Enthusiast</h2>
@@ -91,7 +81,7 @@
                     <li>View the challenges and solutions on GitHub <a href="https://github.com/hacksu/kent-hack-it">here</a>.</li>
                 </ul>
             </div>
-            
+
             <div class="section">
                 <h3>Skills</h3>
                 <ul>
@@ -133,6 +123,4 @@
         </div>
         <img src="/static/headshot.JPG" alt="Austin Sternberg Headshot" class="resume-headshot">
     </div>
-    {{ footer|safe }} <!-- Inject the footer -->
-</body>
-</html>
+{% endblock %}

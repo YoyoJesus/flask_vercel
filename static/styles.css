@@ -98,3 +98,25 @@ h1, h2 {
     height: 100%;
     border: none;
 }
+
+/* Normalize heading sizes and spacing for resume sections so H4s look consistent */
+.resume-content h3 {
+    font-size: 1.25rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.resume-content h4 {
+    font-size: 1.05rem; /* slightly larger than body text */
+    font-weight: 600;
+    margin-top: 0.6rem;
+    margin-bottom: 0.35rem;
+    color: #111; /* ensure dark text on the white container */
+}
+
+.resume-content h5 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
